@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Nav from './Components/Nav/Nav';
+import { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCuurentWeather } from './Redux/Slices/CurrentWeather/CurrentWeatherThunk';
+import HomePage from './Pages/HomePage/HomePage';
+import NotFound from './Components/NotFound/NotFound';
+import NotFoundPage from './Pages/NotFoundPage.jsx/NotFoundPage';
+
+
+
 
 function App() {
+
+  const {loadingStatus} = useSelector((state)=>state.currentWeatherData)
+
+
+  const dispatch = useDispatch()
+
+
+  useEffect(()=>{
+    dispatch(getCuurentWeather({city:"Yerevan"}))
+
+  },[])  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Nav/>
+      <Routes>
+        <Route path='/' element={loadingStatus === "rejected" ? <NotFound/> : loadingStatus === "fulfilled" ? <HomePage/> : ""}/>
+        <Route path='*' element={<NotFoundPage/>}/>
+      </Routes>
     </div>
   );
 }

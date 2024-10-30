@@ -1,0 +1,13 @@
+.current_weather_main{
+    width: 1140px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.cuurent_weather_daily{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 400px;
+}

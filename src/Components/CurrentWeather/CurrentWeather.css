@@ -1,0 +1,13 @@
+.current_weather{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weather{
+    font-size: 20px;
+}
+.weather img{
+    width: 140px;
+    height: 140px;
+}
